@@ -53,6 +53,7 @@ Running `lerna version --conventional-commits` without the above flags will rele
 - [`--exact`](#--exact)
 - [`--force-publish`](#--force-publish)
 - [`--git-remote`](#--git-remote-name)
+- [`--git-tag-command`](#--git-tag-command-cmd)
 - [`--ignore-changes`](#--ignore-changes)
 - [`--ignore-scripts`](#--ignore-scripts)
 - [`--include-merged-tags`](#--include-merged-tags)
@@ -232,6 +233,26 @@ lerna version --force-publish
 When run with this flag, `lerna version` will force publish the specified packages (comma-separated) or all packages using `*`.
 
 > This will skip the `lerna changed` check for changed packages and forces a package that didn't have a `git diff` change to be updated.
+
+### `--git-tag-command <cmd>`
+
+Allows users to specify a wrapper command in CD/CI pipelines that have no direct write access.
+
+```sh
+lerna version --git-tag-command "git gh-tag %s -m %s"
+```
+
+This can also be configured in `lerna.json`.
+
+```json
+{
+  "command": {
+    "version": {
+      "gitTagCommand": "git gh-tag %s -m %s"
+    }
+  }
+}
+```
 
 ### `--git-remote <name>`
 
